@@ -16,6 +16,8 @@ Example:
 
 `end` also saves to `out` path.
 
+page offset is bottom, left (x = 0, y = 0)
+
 .write(x, y, text)
 
 
