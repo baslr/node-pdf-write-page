@@ -16,6 +16,10 @@ Example:
 
 `end` also saves to `out` path.
 
+.write(x, y, text)
+
+
+
 #### .cfg()
 options:
 
