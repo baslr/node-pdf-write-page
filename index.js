@@ -36,6 +36,13 @@
         }
         return this;
       },
+      image: function(x, y, path, opts) {
+        if (opts == null) {
+          opts = {};
+        }
+        ctx.drawImage(x, y, path, opts);
+        return this;
+      },
       restoreCfg: function() {
         cfg = {
           font: pdfWriter.getFontForFile(__dirname + "/SourceSansPro-Regular.ttf"),

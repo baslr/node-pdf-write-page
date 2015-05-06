@@ -29,6 +29,10 @@ module.exports = (opts) ->
         delete cfg.fontPath
       this
 
+    image: (x, y, path, opts = {}) ->
+      ctx.drawImage x, y, path, opts
+      this
+
     restoreCfg: () ->
       cfg =
         font       : pdfWriter.getFontForFile "#{__dirname}/SourceSansPro-Regular.ttf"
