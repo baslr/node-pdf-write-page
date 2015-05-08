@@ -33,6 +33,12 @@ module.exports = (opts) ->
       ctx.drawImage x, y, path, opts
       this
 
+    page: (nPage) ->
+      pageModifier.endContext().writePage()
+      pageModifier = new hummus.PDFPageModifier pdfWriter, nPage
+      ctx = pageModifier.startContext().getContext()
+      this
+
     restoreCfg: () ->
       cfg =
         font       : pdfWriter.getFontForFile "#{__dirname}/SourceSansPro-Regular.ttf"

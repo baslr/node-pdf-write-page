@@ -43,6 +43,12 @@
         ctx.drawImage(x, y, path, opts);
         return this;
       },
+      page: function(nPage) {
+        pageModifier.endContext().writePage();
+        pageModifier = new hummus.PDFPageModifier(pdfWriter, nPage);
+        ctx = pageModifier.startContext().getContext();
+        return this;
+      },
       restoreCfg: function() {
         cfg = {
           font: pdfWriter.getFontForFile(__dirname + "/SourceSansPro-Regular.ttf"),

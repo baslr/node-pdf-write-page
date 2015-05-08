@@ -3,27 +3,28 @@ just write text in different color, font, and size to a existing pdf and save th
 ### API
 
 Example:
-
-    pdf = require 'pdf-write-page'
-    pdf {in:'test_unmodified.pdf', out:'test_modified.pdf', pageNumber:0}
-    .write 10, 0, 'A'
-    .write 10, 14, 'B'
-    .cfg {size:60}
-    .write 10, 28, 'C'
-    .restoreCfg()
-    .write 100, 100, 'D'
-    .end()
+```coffeescript
+pdf = require 'pdf-write-page'
+pdf {in:'test_unmodified.pdf', out:'test_modified.pdf', pageNumber:0}
+.write 10, 0, 'A'
+.write 10, 14, 'B'
+.cfg {size:60}
+.write 10, 28, 'C'
+.restoreCfg()
+.write 100, 100, 'D'
+.end()
+```
 
 `end` also saves to `out` path.
 
 page offset is bottom, left (x = 0, y = 0)
 
-#### write
+#### .write()
 writes some text
 
     .write(x, y, text)
 
-#### image
+#### .image()
 add an image (jpg, pdf, tiff) to the pdf
 
 copied from <https://github.com/galkahana/HummusJS/wiki/Show-images>
@@ -38,13 +39,24 @@ Optionally there's a 4th parameter which is an options object. The object may ha
     * `fit` - either `always` or `overflow`. If `always` Fit may always happen scaling up or down. If `overflow` fit will scale only if the image dimensions overflow the box.
 
 example:
+```coffeescript
+.image(x, y, path, opts)
+```
 
-    .image()x, y, path, opts)
+#### .page()
+set the current page that is modified
+Pagecount starts as 0
+
+exmaple:
+```coffeescript
+    .page(1) # update page 2
+```
 
 #### .cfg()
 options:
-
+```coffeescript
     fontPath   : ''
     size       : 14
     colorspace : 'gray'
     color      : 0x00
+```
