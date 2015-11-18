@@ -12,6 +12,20 @@
       modifiedFilePath: opts.out
     });
     pageModifier = new hummus.PDFPageModifier(pdfWriter, opts.pageNumber);
+    
+    //Check if the PDF is editable.
+    try {
+      if(pageModifier.contexts.length > 0) {
+        ctx = pageModifier.startContext().getContext();
+      }else{
+        
+        pdfWriter.end();
+        throw new Error("PDF is not editable");
+      }
+    }catch(err){
+      throw err;
+    }
+    
     ctx = pageModifier.startContext().getContext();
     cfg = {
       font: pdfWriter.getFontForFile(__dirname + "/SourceSansPro-Regular.ttf"),
