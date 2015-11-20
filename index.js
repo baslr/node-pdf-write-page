@@ -11,7 +11,15 @@
     pdfWriter = hummus.createWriterToModify(opts["in"], {
       modifiedFilePath: opts.out
     });
+    
+    var pdfReader = pdfWriter.getModifiedFileParser();
+
+    if (pdfReader.isEncrypted()) {
+        throw new Error("The PDF is encrypted.");
+    }
+    
     pageModifier = new hummus.PDFPageModifier(pdfWriter, opts.pageNumber);
+    
     ctx = pageModifier.startContext().getContext();
     cfg = {
       font: pdfWriter.getFontForFile(__dirname + "/SourceSansPro-Regular.ttf"),
