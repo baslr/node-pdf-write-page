@@ -11,20 +11,14 @@
     pdfWriter = hummus.createWriterToModify(opts["in"], {
       modifiedFilePath: opts.out
     });
-    pageModifier = new hummus.PDFPageModifier(pdfWriter, opts.pageNumber);
     
-    //Check if the PDF is editable.
-    try {
-      if(pageModifier.contexts.length > 0) {
-        ctx = pageModifier.startContext().getContext();
-      }else{
-        
-        pdfWriter.end();
-        throw new Error("PDF is not editable");
-      }
-    }catch(err){
-      throw err;
+    var pdfReader = pdfWriter.getModifiedFileParser();
+
+    if (pdfReader.isEncrypted()) {
+        throw new Error("The PDF is encrypted.");
     }
+    
+    pageModifier = new hummus.PDFPageModifier(pdfWriter, opts.pageNumber);
     
     ctx = pageModifier.startContext().getContext();
     cfg = {
